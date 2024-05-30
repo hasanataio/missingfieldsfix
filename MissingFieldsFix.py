@@ -102,6 +102,7 @@ def fix_missing_fields(filename):
     def fix_category_sheet(cols,sheetname):
         data=read_or_create_sheet(filename,sheet_name=sheetname)
         category_names=list(data['categoryName'])
+        data['id']=[i for i in range(1,len(data)+1)]
         data['posDisplayName']=category_names
         data['kdsDisplayName']=category_names
         data['sortOrder']=[i for i in range(1,len(data)+1)]
