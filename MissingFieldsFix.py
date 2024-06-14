@@ -1,6 +1,6 @@
 import pandas as pd
 from openpyxl import Workbook, load_workbook
-
+import numpy as np
 
 
 missing_fields={'Menu': {'id': 1,
@@ -93,7 +93,7 @@ def fix_missing_fields(filename):
 
     def fix_menu_sheet(cols,sheetname):
         data=read_or_create_sheet(filename,sheet_name=sheetname)
-        if len(data['menuName'])<1:
+        if len(data['menuName'].values)<1 or np.isnan(list(data['menuName'].values)).any():
             for col in missing_fields[sheetname].keys():
                 data[col]=[missing_fields[sheetname][col]]
             dataframes[sheetname]=data
